@@ -6,11 +6,11 @@ import { Planet } from './Planet'
 import { AsteroidBelt } from './AsteroidBelt'
 
 export const PORTFOLIO_MAPPING = [
-  { id: 'about', name: 'About Me', color: '#2b82c9', radius: 1, distance: 8.5, speed: 0.5 }, // Earth
-  { id: 'projects', name: 'Projects', color: '#c1440e', radius: 0.53, distance: 11, speed: 0.4 }, // Mars
-  { id: 'experience', name: 'Experience', color: '#d39c7e', radius: 2.5, distance: 16, speed: 0.2 }, // Jupiter
-  { id: 'skills', name: 'Skills', color: '#ead6b8', radius: 2.1, distance: 22, speed: 0.15, hasRing: true, ringColor: '#cfae76', ringRadius: [2.5, 4.5] as [number, number] }, // Saturn
-  { id: 'contact', name: 'Contact', color: '#e3bb76', radius: 0.95, distance: 6, speed: 0.6 }, // Venus
+  { id: 'about', name: 'Earth', color: '#2b82c9', radius: 1, distance: 8.5, speed: 0.5 }, // Earth
+  { id: 'projects', name: 'Mars', color: '#c1440e', radius: 0.53, distance: 11, speed: 0.4 }, // Mars
+  { id: 'experience', name: 'Jupiter', color: '#d39c7e', radius: 2.5, distance: 16, speed: 0.2 }, // Jupiter
+  { id: 'skills', name: 'Saturn', color: '#ead6b8', radius: 2.1, distance: 22, speed: 0.15, hasRing: true, ringColor: '#cfae76', ringRadius: [2.5, 4.5] as [number, number] }, // Saturn
+  { id: 'contact', name: 'Venus', color: '#e3bb76', radius: 0.95, distance: 6, speed: 0.6 }, // Venus
 ]
 
 export function SolarSystem() {
