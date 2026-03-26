@@ -3,6 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { Sphere } from '@react-three/drei'
 import * as THREE from 'three'
 import { Planet } from './Planet'
+import { AsteroidBelt } from './AsteroidBelt'
 
 export const PORTFOLIO_MAPPING = [
   { id: 'about', name: 'About Me', color: '#2b82c9', radius: 1, distance: 8.5, speed: 0.5 }, // Earth
@@ -21,7 +22,7 @@ export function SolarSystem({ onPlanetClick }: SolarSystemProps) {
 
   useFrame(() => {
     if (sunRef.current) {
-      sunRef.current.rotation.y += 0.005
+      sunRef.current.rotation.y += 0.002
     }
   })
 
@@ -30,7 +31,7 @@ export function SolarSystem({ onPlanetClick }: SolarSystemProps) {
       {/* The Sun (Home / Intro) */}
       <Sphere 
         ref={sunRef} 
-        args={[2.5, 64, 64]} 
+        args={[3, 64, 64]} 
         onClick={(e) => {
           e.stopPropagation()
           onPlanetClick('home', 'Welcome')
@@ -46,9 +47,12 @@ export function SolarSystem({ onPlanetClick }: SolarSystemProps) {
         <meshBasicMaterial color="#fcd34d" />
       </Sphere>
       
-      {/* Sun Glow */}
-      <PointLight position={[0, 0, 0]} color="#fde68a" intensity={400} distance={100} decay={2} />
+      {/* Sun Glow/Bloom Source */}
+      <PointLight position={[0, 0, 0]} color="#fde68a" intensity={400} distance={150} decay={2} />
       <ambientLight intensity={0.05} />
+
+      {/* Asteroid Belt separating Mars and Jupiter */}
+      <AsteroidBelt count={3000} innerRadius={12.5} outerRadius={14.5} />
 
       {/* Portfolio Planets */}
       {PORTFOLIO_MAPPING.map((planet) => (

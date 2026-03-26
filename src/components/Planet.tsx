@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Sphere, Ring } from '@react-three/drei'
+import { Sphere, Ring, Html } from '@react-three/drei'
 import * as THREE from 'three'
 
 interface PlanetProps {
@@ -50,6 +50,9 @@ export function Planet({
     }
   })
 
+  // Format section name for aesthetic display
+  const displayName = id === 'home' || id === 'soleil' ? 'Home' : name
+
   return (
     <>
       {/* Orbit path visibility */}
@@ -89,6 +92,14 @@ export function Planet({
             <meshStandardMaterial color={ringColor} side={THREE.DoubleSide} transparent opacity={0.8} />
           </Ring>
         )}
+
+        {/* Floating Label */}
+        <Html distanceFactor={25} position={[0, radius + 1.5, 0]} center zIndexRange={[100, 0]}>
+          <div className="planet-label" onClick={() => onPlanetClick(id, name)}>
+            <span className="planet-label-name">{displayName}</span>
+            <div className="planet-label-line"></div>
+          </div>
+        </Html>
       </group>
     </>
   )
