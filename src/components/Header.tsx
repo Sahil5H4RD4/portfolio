@@ -1,4 +1,4 @@
-import { Menu, Github, Twitter, Linkedin, Mail } from 'lucide-react'
+import { Menu, Github, Linkedin, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 export function Header() {

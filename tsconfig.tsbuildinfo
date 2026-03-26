@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/asteroidbelt.tsx","./src/components/coolmodel.tsx","./src/components/header.tsx","./src/components/hero.tsx","./src/components/planet.tsx","./src/components/planetinfopanel.tsx","./src/components/portfoliopanel.tsx","./src/components/scene.tsx","./src/components/solarsystem.tsx"],"version":"5.6.3"}
