@@ -13,7 +13,6 @@ interface PlanetProps {
   hasRing?: boolean
   ringColor?: string
   ringRadius?: [number, number]
-  onPlanetClick: (id: string, name: string) => void
 }
 
 export function Planet({ 
@@ -25,8 +24,7 @@ export function Planet({
   speed, 
   hasRing, 
   ringColor, 
-  ringRadius,
-  onPlanetClick 
+  ringRadius
 }: PlanetProps) {
   const groupRef = useRef<THREE.Group>(null)
   const planetRef = useRef<THREE.Mesh>(null)
@@ -64,17 +62,6 @@ export function Planet({
         <Sphere 
           ref={planetRef} 
           args={[radius, 32, 32]} 
-          onClick={(e) => {
-            e.stopPropagation()
-            onPlanetClick(id, name)
-          }}
-          onPointerOver={(e) => {
-            e.stopPropagation()
-            document.body.style.cursor = 'pointer'
-          }}
-          onPointerOut={() => {
-            document.body.style.cursor = 'auto'
-          }}
         >
           <meshStandardMaterial 
             color={color} 
@@ -95,7 +82,7 @@ export function Planet({
 
         {/* Floating Label */}
         <Html distanceFactor={25} position={[0, radius + 1.5, 0]} center zIndexRange={[100, 0]}>
-          <div className="planet-label" onClick={() => onPlanetClick(id, name)}>
+          <div className="planet-label" style={{ cursor: 'default' }}>
             <span className="planet-label-name">{displayName}</span>
             <div className="planet-label-line"></div>
           </div>

@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Stars, ScrollControls, useScroll } from '@react-three/drei'
 
@@ -5,7 +6,32 @@ import * as THREE from 'three'
 import { SolarSystem } from './SolarSystem'
 
 interface SceneProps {
-  onPlanetClick: (id: string, name: string) => void
+  onSectionChange: (id: string | null, name: string) => void
+}
+
+function ScrollSectionTracker({ onSectionChange }: { onSectionChange: (id: string | null, name: string) => void }) {
+  const scroll = useScroll()
+  const lastSection = useRef<string | null>(null)
+
+  useFrame(() => {
+    const o = scroll.offset
+    let currentSection: { id: string | null; name: string } | null = null
+
+    if (o < 0.1) currentSection = { id: null, name: '' }
+    else if (o < 0.3) currentSection = { id: 'skills', name: 'Skills' }
+    else if (o < 0.5) currentSection = { id: 'experience', name: 'Experience' }
+    else if (o < 0.7) currentSection = { id: 'projects', name: 'Projects' }
+    else if (o < 0.9) currentSection = { id: 'about', name: 'About Me' }
+    else currentSection = { id: 'contact', name: 'Contact' }
+
+    if (currentSection && currentSection.id !== lastSection.current) {
+      lastSection.current = currentSection.id
+      // Optional: add a tiny timeout so it doesn't snap instantly when scrolling fast
+      onSectionChange(currentSection.id, currentSection.name)
+    }
+  })
+
+  return null
 }
 
 // Controls the camera position based on scroll progress
@@ -52,7 +78,7 @@ function ScrollFader() {
 
 
 
-export function Scene({ onPlanetClick }: SceneProps) {
+export function Scene({ onSectionChange }: SceneProps) {
   return (
     <div className="canvas-container">
       <Canvas camera={{ position: [0, 15, 35], fov: 45 }}>
@@ -65,9 +91,10 @@ export function Scene({ onPlanetClick }: SceneProps) {
           {/* The scrolling camera logic */}
           <CameraScroller />
           <ScrollFader />
+          <ScrollSectionTracker onSectionChange={onSectionChange} />
 
           {/* The Solar System with interactive planets */}
-          <SolarSystem onPlanetClick={onPlanetClick} />
+          <SolarSystem />
         </ScrollControls>
 
       </Canvas>

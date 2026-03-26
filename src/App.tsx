@@ -9,7 +9,7 @@ export default function App() {
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null)
   const [selectedSectionName, setSelectedSectionName] = useState<string>('')
 
-  const handlePlanetClick = (id: string, name: string) => {
+  const handleSectionChange = (id: string | null, name: string) => {
     setSelectedSectionId(id)
     setSelectedSectionName(name)
   }
@@ -22,7 +22,7 @@ export default function App() {
     <div className="app-container">
       {/* 3D Background */}
       <div className="canvas-wrapper">
-        <Scene onPlanetClick={handlePlanetClick} />
+        <Scene onSectionChange={handleSectionChange} />
       </div>
 
       {/* UI Overlay */}

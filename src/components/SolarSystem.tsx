@@ -13,11 +13,7 @@ export const PORTFOLIO_MAPPING = [
   { id: 'contact', name: 'Contact', color: '#e3bb76', radius: 0.95, distance: 6, speed: 0.6 }, // Venus
 ]
 
-interface SolarSystemProps {
-  onPlanetClick: (id: string, name: string) => void
-}
-
-export function SolarSystem({ onPlanetClick }: SolarSystemProps) {
+export function SolarSystem() {
   const sunRef = useRef<THREE.Mesh>(null)
 
   useFrame(() => {
@@ -32,17 +28,6 @@ export function SolarSystem({ onPlanetClick }: SolarSystemProps) {
       <Sphere 
         ref={sunRef} 
         args={[3, 64, 64]} 
-        onClick={(e) => {
-          e.stopPropagation()
-          onPlanetClick('home', 'Welcome')
-        }}
-        onPointerOver={(e) => {
-          e.stopPropagation()
-          document.body.style.cursor = 'pointer'
-        }}
-        onPointerOut={() => {
-          document.body.style.cursor = 'auto'
-        }}
       >
         <meshBasicMaterial color="#fcd34d" />
       </Sphere>
@@ -59,7 +44,6 @@ export function SolarSystem({ onPlanetClick }: SolarSystemProps) {
         <Planet 
           key={planet.id}
           {...planet}
-          onPlanetClick={onPlanetClick}
         />
       ))}
     </group>
