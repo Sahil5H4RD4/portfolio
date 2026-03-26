@@ -391,15 +391,22 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 2;
 }
 
 .skill-tag {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
-  font-size: 0.85rem;
-  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  color: var(--accent-glow);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.skill-tag:last-child {
+  border-right: none;
 }
 
 .contact-form {
@@ -494,7 +501,88 @@ body {
   margin-top: 4px;
 }
 
+/* Scroll Pages Overlay */
+.scroll-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.scroll-section {
+  width: 100%;
+  padding: 0 10%;
+  pointer-events: auto;
+}
+
+.left-aligned {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.right-aligned {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.center-aligned {
+  display: flex;
+  justify-content: center;
+}
+
+.scroll-card {
+  width: 450px;
+  max-width: 100%;
+  padding: 2.5rem;
+  border-radius: 1rem;
+}
+
+.glass-panel {
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  color: var(--text-primary);
+}
+
+/* Add text shadows so text is readable against bright stars/planets */
+.glass-panel h2, .glass-panel h4, .glass-panel h5, .glass-panel p {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.flex-row-responsive {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  width: 900px !important;
+  max-width: 100%;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.divider-left {
+  border-left: 1px solid var(--glass-border);
+  padding-left: 3rem;
+}
+
 /* Responsive */
+@media (max-width: 900px) {
+  .flex-row-responsive {
+    flex-direction: column;
+    width: 100% !important;
+  }
+  .divider-left {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .header { padding: 1.5rem; }
   .nav-links, .icon-btn { display: none; }
