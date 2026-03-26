@@ -19,8 +19,8 @@ function CameraScroller() {
     const offset = scroll.offset // 0 to 1
     
     // Lerp camera position
-    // Start at [0, 15, 40]
-    // End near Saturn / Jupiter bounds at [10, 5, 20]
+    // Start at [0, 15, 35]
+    // End near Saturn / Jupiter bounds at [5, 2, 10]
     const targetZ = THREE.MathUtils.lerp(35, 10, offset)
     const targetY = THREE.MathUtils.lerp(15, 2, offset)
     const targetX = THREE.MathUtils.lerp(0, 5, offset)
@@ -35,6 +35,23 @@ function CameraScroller() {
   return null
 }
 
+function ScrollFader() {
+  const scroll = useScroll()
+  useFrame(() => {
+    const heroEl = document.getElementById('hero-main')
+    if (heroEl) {
+      // Fade out from scroll 0.0 to 0.1
+      const opacity = 1 - scroll.offset * 10
+      heroEl.style.opacity = Math.max(0, opacity).toString()
+      heroEl.style.transform = `translateY(${scroll.offset * -200}px)`
+      heroEl.style.pointerEvents = scroll.offset > 0.05 ? 'none' : 'auto'
+    }
+  })
+  return null
+}
+
+
+
 export function Scene({ onPlanetClick }: SceneProps) {
   return (
     <div className="canvas-container">
@@ -47,6 +64,7 @@ export function Scene({ onPlanetClick }: SceneProps) {
         <ScrollControls pages={5} damping={0.25} distance={1.5}>
           {/* The scrolling camera logic */}
           <CameraScroller />
+          <ScrollFader />
 
           {/* The Solar System with interactive planets */}
           <SolarSystem onPlanetClick={onPlanetClick} />
