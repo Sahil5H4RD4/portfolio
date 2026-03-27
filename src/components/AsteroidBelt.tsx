@@ -52,11 +52,36 @@ export function AsteroidBelt({ count = 2000, innerRadius = 13, outerRadius = 15 
     meshRef.current.instanceMatrix.needsUpdate = true
   }, [count, dummy, innerRadius, outerRadius, phases, speeds])
 
-  useFrame(() => {
-    if (meshRef.current) {
-      // Slowly rotate the entire belt
-      meshRef.current.rotation.y += 0.001
+  useFrame((state) => {
+    if (!meshRef.current) return
+    
+    const time = state.clock.getElapsedTime()
+    
+    for (let i = 0; i < count; i++) {
+      // Calculate individual orbital movement
+      const currentTheta = phases[i] + time * speeds[i] * 0.1
+      const radius = innerRadius + (i % 10) * (outerRadius - innerRadius) / 10 // Deterministic radius per index
+      
+      const x = Math.cos(currentTheta) * radius
+      const z = Math.sin(currentTheta) * radius
+      
+      // We don't want to re-calculate EVERYTHING, but for simple orbital movement it's okay.
+      // To be more efficient, we'd store initial Y, rotation, and scale.
+      // For now, let's just make them move in orbit.
+      
+      dummy.position.set(x, (i % 5 - 2.5) * 0.2, z) // Semi-deterministic height
+      dummy.rotation.set(time * speeds[i], time * speeds[i] * 1.1, time * speeds[i] * 0.9)
+      
+      const scale = 0.05 + (i % 15) * 0.01
+      dummy.scale.set(scale, scale, scale)
+      
+      dummy.updateMatrix()
+      meshRef.current.setMatrixAt(i, dummy.matrix)
     }
+    meshRef.current.instanceMatrix.needsUpdate = true
+    
+    // Also keep the slow overall rotation
+    meshRef.current.rotation.y += 0.0002
   })
 
   return (

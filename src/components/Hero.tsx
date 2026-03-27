@@ -13,16 +13,16 @@ export function Hero() {
       >
         <div className="badge">
           <Sparkles size={16} className="badge-icon" />
-          <span>Creative Developer & Engineer</span>
+          <span>Full-Stack Creative Engineer</span>
         </div>
         
         <h1 className="hero-title">
-          Hello, I build <br />
-          <span className="text-gradient">Digital Universes</span>
+          Crafting Immersive <br />
+          <span className="text-gradient">Digital Experiences</span>
         </h1>
         
         <p className="hero-subtitle">
-          Welcome to my interactive 3D portfolio. I specialize in React, WebGL, and modern UI architectures. 
+          Transforming complex ideas into elegant, interactive 3D realities using React, WebGL, and modern architectures.
         </p>
         
         <div className="hero-action-hint">
