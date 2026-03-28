@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Sphere } from '@react-three/drei'
+import { Sphere, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { Planet } from './Planet'
 import { AsteroidBelt } from './AsteroidBelt'
@@ -31,6 +31,14 @@ export function SolarSystem() {
       >
         <meshBasicMaterial color="#fcd34d" />
       </Sphere>
+
+      {/* Sun Label */}
+      <Html distanceFactor={25} position={[0, 5, 0]} center zIndexRange={[100, 0]}>
+        <div className="planet-label" style={{ cursor: 'default' }}>
+          <span className="planet-label-name">Sun</span>
+          <div className="planet-label-line"></div>
+        </div>
+      </Html>
       
       {/* Sun Glow/Bloom Source */}
       <PointLight position={[0, 0, 0]} color="#fde68a" intensity={400} distance={150} decay={2} />
