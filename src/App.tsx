@@ -1,3 +1,4 @@
+// Main Application Component
 import { Scene } from './components/Scene'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
